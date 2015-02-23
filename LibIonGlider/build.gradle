@@ -1,0 +1,36 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion "21.1.2"
+
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 21
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            //proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile "com.android.support:support-v4:${SUPPORT_V4_VERSION}"
+    compile "com.android.support:appcompat-v7:${SUPPORT_V7_VERSION}"
+    compile 'com.github.bumptech.glide:glide:3.5.2'
+    compile 'com.koushikdutta.ion:ion:2.+'
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+}
+
+task("generateIonJavadoc", type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    options.memberLevel = JavadocMemberLevel.PUBLIC
+    options.encoding = "UTF-8"
+    options.links("http://docs.oracle.com/javase/7/docs/api/");
+    options.links("http://d.android.com/reference/");
+}
